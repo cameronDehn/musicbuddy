@@ -3,9 +3,10 @@ import reactLogo from './assets/react.svg'
 import './App.css'
 import Login from './components/login'
 import ListPage from './components/listpage';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -14,31 +15,29 @@ function App() {
 
   return (
     <div className="App">
-      <div>
+      <h1>
         <a href="https://reactjs.org" target="_blank">
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
-      </div>
-      <h1 >music buddy</h1>
+        music buddy
+      </h1>
       {isLoggedIn ? (
-        <p>You are logged in!</p>
+        <>
+          <Router>
+            <Routes>
+              <Route path="/listpage" element={<ListPage />} />
+            </Routes>
+          </Router>
+        </>
       ) : (
         <Login onLogin={handleLogin} />
-
-        
       )}
-      <div>
+      <div className="card">
+        <button>Connect with Instagram</button>
       </div>
-        <div className="card">
-        <button>
-          Connect with Instagram
-        </button>
-      </div>
-      <p className="read-the-docs">
-        Click on the Music Buddy logo to learn more
-      </p>
+      <p className="read-the-docs">Click on the Music Buddy logo to learn more</p>
     </div>
-  )
+  );
 }
 
 export default App;
